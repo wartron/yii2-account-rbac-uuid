@@ -61,9 +61,9 @@ class m150818_232849_uuid_rbac_init extends \yii\db\Migration
 
         $this->createTable($authManager->assignmentTable, [
             'item_name'     =>  $this->string(64)->notNull(),
-            'user_id'       =>  'BINARY(16) NOT NULL',
+            'account_id'    =>  'BINARY(16) NOT NULL',
             'created_at'    =>  $this->integer(),
-            'PRIMARY KEY (item_name, user_id)',
+            'PRIMARY KEY (item_name, account_id)',
             'FOREIGN KEY (item_name) REFERENCES ' . $authManager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
         ], $tableOptions);
     }

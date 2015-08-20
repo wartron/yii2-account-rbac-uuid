@@ -25,13 +25,13 @@ class Assignment extends Model
 {
 	/** @var array */
     public $items = [];
-	
-	/** @var integer */
-    public $user_id;
-    
+
+	/** @var binary */
+    public $accound_id;
+
     /** @var boolean */
     public $updated = false;
-	
+
 	/** @var DbManager */
     protected $manager;
 
@@ -40,23 +40,23 @@ class Assignment extends Model
     {
         parent::init();
         $this->manager = Yii::$app->authManager;
-        if ($this->user_id === null) {
-            throw new InvalidConfigException('user_id must be set');
+        if ($this->accound_id === null) {
+            throw new InvalidConfigException('accound_id must be set');
         }
-        
-        $this->items = array_keys($this->manager->getItemsByUser($this->user_id));
+
+        $this->items = array_keys($this->manager->getItemsByUser($this->accound_id));
     }
-	
+
     /** @inheritdoc */
     public function rules()
     {
         return [
-            ['user_id', 'required'],
+            ['accound_id', 'required'],
             ['items', RbacValidator::className()],
-            ['user_id', 'integer']
+            ['accound_id', 'integer']
         ];
     }
-	
+
     /**
      * Updates auth assignments for user.
      * @return boolean
@@ -71,15 +71,15 @@ class Assignment extends Model
             $this->items = [];
         }
 
-        $assignedItems = $this->manager->getItemsByUser($this->user_id);
+        $assignedItems = $this->manager->getItemsByUser($this->accound_id);
         $assignedItemsNames = array_keys($assignedItems);
 
         foreach (array_diff($assignedItemsNames, $this->items) as $item) {
-            $this->manager->revoke($assignedItems[$item], $this->user_id);
+            $this->manager->revoke($assignedItems[$item], $this->accound_id);
         }
 
         foreach (array_diff($this->items, $assignedItemsNames) as $item) {
-            $this->manager->assign($this->manager->getItem($item), $this->user_id);
+            $this->manager->assign($this->manager->getItem($item), $this->accound_id);
         }
 
         $this->updated = true;

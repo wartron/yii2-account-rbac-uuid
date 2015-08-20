@@ -14,6 +14,7 @@ namespace dektrium\rbac\controllers;
 use dektrium\rbac\models\Assignment;
 use Yii;
 use yii\web\Controller;
+use wartron\yii2uuid\helpers\Uuid;
 
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
@@ -22,16 +23,17 @@ class AssignmentController extends Controller
 {
     /**
      * Show form with auth items for user.
-     * 
-     * @param int $id
+     *
+     * @param hex $id
      */
     public function actionAssign($id)
     {
+        $id = Uuid::str2uuid($id);
         $model = Yii::createObject([
             'class'   => Assignment::className(),
-            'user_id' => $id,
+            'account_id' => $id,
         ]);
-        
+
         if ($model->load(\Yii::$app->request->post()) && $model->updateAssignments()) {
         }
 
@@ -40,13 +42,13 @@ class AssignmentController extends Controller
         ]);
         /*$model = Yii::createObject([
             'class'   => Assignment::className(),
-            'user_id' => $id,
+            'account_id' => $id,
         ]);
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->updateAssignments()) {
-            
+
         }
-        
+
         return $this->render('assign', [
             'model' => $model,
         ]);*/

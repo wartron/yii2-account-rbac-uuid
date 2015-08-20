@@ -26,10 +26,10 @@ interface ManagerInterface extends BaseManagerInterface
     public function getItems($type = null, $excludeItems = []);
 
     /**
-     * @param  integer $userId
+     * @param  binary $accountId
      * @return mixed
      */
-    public function getItemsByUser($userId);
+    public function getItemsByUser($accountId);
 
     /**
      * @param  string $name

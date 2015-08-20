@@ -1,10 +1,10 @@
 <?php
 
-/* 
+/*
  * This file is part of the Dektrium project
- * 
+ *
  * (c) Dektrium project <http://github.com/dektrium>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     'enableAjaxValidation'   => false,
 ]) ?>
 
-<?= Html::activeHiddenInput($model, 'user_id') ?>
+<?= Html::activeHiddenInput($model, 'accound_id') ?>
 
 <?= $form->field($model, 'items')->widget(Select2::className(), [
     'data' => $model->getAvailableItems(),
