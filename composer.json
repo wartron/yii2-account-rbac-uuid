@@ -1,31 +1,33 @@
 {
-  "name": "dektrium/yii2-rbac",
-  "description": "RBAC management module for Yii2",
-  "keywords": ["yii2", "yii2-rbac", "rbac management", "dektrium", "rbac gui", "yii rbac", "rbac module"],
-  "type": "yii2-extension",
-  "license": "MIT",
-  "support": {
-    "issues": "https://github.com/dektrium/yii2-rbac/issues?state=open",
-    "source": "https://github.com/dektrium/yii2-rbac"
-  },
-  "authors": [
-    {
-      "name": "Dmitry Erofeev",
-      "email": "dmeroff@gmail.com",
-      "homepage": "http://dmeroff.ru"
+    "name": "wartron/yii2-account-rbac-uuid",
+    "description": "RBAC management module for Yii2",
+    "keywords": ["yii2", "yii2-account", "rbac management", "wartron", "rbac gui", "yii rbac", "rbac module", "yii2-uuid", "uuid"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Will Wharton",
+            "email": "w@wartron.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wartron/yii2-uuid.git"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "2.0.*",
+        "wartron/yii2-uuid": "dev-master",
+        "kartik-v/yii2-widget-select2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "wartron\\yii2account\\rbac\\": ""
+        }
+    },
+    "extra": {
+        "bootstrap": "wartron\\yii2account\\rbac\\Bootstrap"
     }
-  ],
-  "minimum-stability": "dev",
-  "require": {
-    "yiisoft/yii2": "2.0.*",
-    "kartik-v/yii2-widget-select2": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "dektrium\\rbac\\": ""
-    }
-  },
-  "extra": {
-    "bootstrap": "dektrium\\rbac\\Bootstrap"
-  }
 }

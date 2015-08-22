@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?php $this->beginContent('@dektrium/rbac/views/layout.php') ?>
+<?php $this->beginContent('@wartron/yii2account-rbac-uuid/rbac/views/layout.php') ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac\controllers;
+namespace wartron\yii2account\rbac\controllers;
 
 use yii\rbac\Role;
 use yii\web\NotFoundHttpException;
@@ -21,8 +21,8 @@ use yii\rbac\Item;
 class RoleController extends ItemControllerAbstract
 {
     /** @var string */
-    protected $modelClass = 'dektrium\rbac\models\Role';
-    
+    protected $modelClass = 'wartron\yii2account\rbac\models\Role';
+
     protected $type = Item::TYPE_ROLE;
 
     /** @inheritdoc */

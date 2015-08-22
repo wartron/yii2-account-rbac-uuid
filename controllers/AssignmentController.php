@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac\controllers;
+namespace wartron\yii2account\rbac\controllers;
 
-use dektrium\rbac\models\Assignment;
+use wartron\yii2account\rbac\models\Assignment;
 use Yii;
 use yii\web\Controller;
 use wartron\yii2uuid\helpers\Uuid;
@@ -37,7 +37,7 @@ class AssignmentController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->updateAssignments()) {
         }
 
-        return \dektrium\rbac\widgets\Assignments::widget([
+        return \wartron\yii2account\rbac\widgets\Assignments::widget([
             'model' => $model,
         ]);
         /*$model = Yii::createObject([

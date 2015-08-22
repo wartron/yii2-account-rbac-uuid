@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac;
+namespace wartron\yii2account\rbac;
 
-use dektrium\rbac\components\DbManager;
-use dektrium\rbac\components\ManagerInterface;
-use dektrium\user\Module as UserModule;
+use wartron\yii2account\rbac\components\DbManager;
+use wartron\yii2account\rbac\components\ManagerInterface;
+use wartron\yii2account\Module as AccountModule;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -33,7 +33,7 @@ class Bootstrap implements BootstrapInterface
                 'basePath' => __DIR__ . '/messages',
             ];
         }
-            
+
         if ($this->checkRbacModuleInstalled($app)) {
             // register auth manager
             if (!$this->checkAuthManagerConfigured($app)) {
@@ -42,13 +42,13 @@ class Bootstrap implements BootstrapInterface
                 ]);
             }
 
-            // if dektrium/user extension is installed, copy admin list from there
+            // if wartron\yii2account/user extension is installed, copy admin list from there
             if ($this->checkUserModuleInstalled($app)) {
-                $app->getModule('rbac')->admins = $app->getModule('user')->admins;
-            }   
+                $app->getModule('rbac')->admins = $app->getModule('account')->admins;
+            }
         }
     }
-    
+
     /**
      * Verifies that dektrium/yii2-rbac is installed and configured.
      * @param  Application $app
@@ -58,17 +58,17 @@ class Bootstrap implements BootstrapInterface
     {
         return $app->hasModule('rbac') && $app->getModule('rbac') instanceof Module;
     }
-    
+
     /**
      * Verifies that dektrium/yii2-user is installed and configured.
      * @param  Application $app
      * @return bool
      */
-    protected function checkUserModuleInstalled(Application $app)
+    protected function checkAccountModuleInstalled(Application $app)
     {
-        return $app->hasModule('user') && $app->getModule('user') instanceof UserModule;
+        return $app->hasModule('account') && $app->getModule('account') instanceof AccountModule;
     }
-    
+
     /**
      * Verifies that authManager component is configured.
      * @param  Application $app

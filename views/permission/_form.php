@@ -11,7 +11,7 @@
 
 /**
  * @var $this  yii\web\View
- * @var $model dektrium\rbac\models\Role
+ * @var $model wartron\yii2account\rbac\models\Role
  */
 
 use kartik\select2\Select2;

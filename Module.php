@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac;
+namespace wartron\yii2account\rbac;
 
 use Yii;
 use yii\base\Module as BaseModule;
@@ -25,10 +25,10 @@ class Module extends BaseModule
 
     /** @var string */
     public $defaultRoute = 'role/index';
-    
+
     /** @var array */
     public $admins = [];
-    
+
     /** @inheritdoc */
     public function behaviors()
     {

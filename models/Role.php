@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac\models;
+namespace wartron\yii2account\rbac\models;
 
 use yii\helpers\ArrayHelper;
 

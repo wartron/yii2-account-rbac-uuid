@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace dektrium\rbac\models;
+namespace wartron\yii2account\rbac\models;
 
 use yii\base\Model;
 use yii\rbac\Item;
-use dektrium\rbac\validators\RbacValidator;
+use wartron\yii2account\rbac\validators\RbacValidator;
 
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
@@ -35,7 +35,7 @@ abstract class AuthItem extends Model
     /** @var \yii\rbac\Role|\yii\rbac\Permission */
     public $item;
 
-    /** @var \dektrium\rbac\components\DbManager */
+    /** @var \wartron\yii2account\rbac\components\DbManager */
     protected $manager;
 
     /** @inheritdoc */
@@ -124,7 +124,7 @@ abstract class AuthItem extends Model
         } else {
             $this->item->ruleName = null;
         }
-  
+
         if ($isNewItem) {
             \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Item has been created'));
             $this->manager->add($this->item);
