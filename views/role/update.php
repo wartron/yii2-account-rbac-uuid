@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?php $this->beginContent('@wartron/yii2account-rbac-uuid/views/layout.php') ?>
+<?php $this->beginContent('@wartron/yii2account/rbac/views/layout.php') ?>
 
 <?= $this->render('_form', [
     'model' => $model,

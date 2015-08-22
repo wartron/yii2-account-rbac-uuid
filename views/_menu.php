@@ -24,8 +24,8 @@ use yii\bootstrap\Nav;
     'items' => [
         [
             'label'   => Yii::t('rbac', 'Users'),
-            'url'     => ['/user/admin/index'],
-            'visible' => isset(Yii::$app->extensions['dektrium/yii2-user']),
+            'url'     => ['/account/admin/index'],
+            'visible' => isset(Yii::$app->extensions['wartron/yii2-account']),
         ],
         [
             'label' => Yii::t('rbac', 'Roles'),
@@ -40,8 +40,8 @@ use yii\bootstrap\Nav;
             'items' => [
                 [
                     'label'   => Yii::t('rbac', 'New user'),
-                    'url'     => ['/user/admin/create'],
-                    'visible' => isset(Yii::$app->extensions['dektrium/yii2-user']),
+                    'url'     => ['/account/admin/create'],
+                    'visible' => isset(Yii::$app->extensions['wartron/yii2-account']),
                 ],
                 [
                     'label' => Yii::t('rbac', 'New role'),
