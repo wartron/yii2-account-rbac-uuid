@@ -26,7 +26,7 @@ use yii\base\Widget;
 class Assignments extends Widget
 {
     /** @var integer ID of the user to whom auth items will be assigned. */
-    public $accoundId;
+    public $accountId;
 
     /** @var DbManager */
     protected $manager;
@@ -36,8 +36,8 @@ class Assignments extends Widget
     {
         parent::init();
         $this->manager = Yii::$app->authManager;
-        if ($this->accoundId === null) {
-            throw new InvalidConfigException('You should set ' . __CLASS__ . '::$accoundId');
+        if ($this->accountId === null) {
+            throw new InvalidConfigException('You should set ' . __CLASS__ . '::$accountId');
         }
     }
 
@@ -46,7 +46,7 @@ class Assignments extends Widget
     {
         $model = Yii::createObject([
             'class'   => Assignment::className(),
-            'account_id' => $this->accoundId,
+            'account_id' => $this->accountId,
         ]);
 
         if ($model->load(\Yii::$app->request->post())) {
