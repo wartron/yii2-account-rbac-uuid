@@ -43,7 +43,7 @@ class Bootstrap implements BootstrapInterface
             }
 
             // if wartron\yii2account/user extension is installed, copy admin list from there
-            if ($this->checkUserModuleInstalled($app)) {
+            if ($this->checkAccountModuleInstalled($app)) {
                 $app->getModule('rbac')->admins = $app->getModule('account')->admins;
             }
         }
