@@ -27,7 +27,7 @@ class m150823_001311_create_default_roles extends Migration
             [
                 'backend-accounts',
                 2,
-                'Can Mannage Accounts',
+                'Can Manage Accounts',
             ],
             [
                 'backend-accounts-block',
@@ -38,6 +38,11 @@ class m150823_001311_create_default_roles extends Migration
                 'backend-accounts-delete',
                 2,
                 'Can Block Accounts',
+            ],
+            [
+                'backend-rbac',
+                2,
+                'Can Manage RBAC',
             ],
         ]);
 
@@ -57,8 +62,16 @@ class m150823_001311_create_default_roles extends Migration
                 'backend-accounts-delete',
             ],
             [
+                'admin',
+                'backend-rbac',
+            ],
+            [
                 'backend',
                 'backend-accounts',
+            ],
+            [
+                'backend',
+                'backend-accounts-block',
             ],
         ]);
     }
