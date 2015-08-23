@@ -11,8 +11,8 @@
 
 namespace wartron\yii2account\rbac\components;
 
-use wartron\yii2account\rbac\models\Assignment;
 use yii\db\Query;
+use yii\rbac\Assignment;
 use yii\rbac\DbManager as BaseDbManager;
 
 /**
@@ -90,9 +90,9 @@ class DbManager extends BaseDbManager implements ManagerInterface
             return null;
         }
         return new Assignment([
-            'account_id' => $row['account_id'],
-            'item_name'  => $row['item_name'],
-            'created_at' => $row['created_at'],
+            'userId' => $row['account_id'],
+            'roleName' => $row['item_name'],
+            'createdAt' => $row['created_at'],
         ]);
     }
     /**
@@ -109,9 +109,9 @@ class DbManager extends BaseDbManager implements ManagerInterface
         $assignments = [];
         foreach ($query->all($this->db) as $row) {
             $assignments[$row['item_name']] = new Assignment([
-                'account_id' => $row['account_id'],
-                'item_name'  => $row['item_name'],
-                'created_at' => $row['created_at'],
+                'userId' => $row['account_id'],
+                'roleName' => $row['item_name'],
+                'createdAt' => $row['created_at'],
             ]);
         }
         return $assignments;
@@ -124,15 +124,15 @@ class DbManager extends BaseDbManager implements ManagerInterface
     public function assign($role, $accountId)
     {
         $assignment = new Assignment([
-            'account_id' => $accountId,
-            'item_name'  => $role->name,
-            'created_at' => time(),
+            'accountId' => $accountId,
+            'roleName' => $role->name,
+            'createdAt' => time(),
         ]);
         $this->db->createCommand()
             ->insert($this->assignmentTable, [
                 'account_id' => $assignment->accountId,
                 'item_name' => $assignment->roleName,
-                'created_at' => $assignment->created_at,
+                'created_at' => $assignment->createdAt,
             ])->execute();
         return $assignment;
     }
