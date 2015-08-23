@@ -119,6 +119,29 @@ abstract class ItemControllerAbstract extends Controller
         ]);
     }
 
+
+    /**
+     * Shows update form.
+     * @param  string $name
+     * @return string|Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionView($name)
+    {
+        /** @var \wartron\yii2account\rbac\models\Role|\wartron\yii2account\rbac\models\Permission $model */
+        $item  = $this->getItem($name);
+        $model = \Yii::createObject([
+            'class'    => $this->modelClass,
+            'scenario' => 'update',
+            'item'     => $item,
+        ]);
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Deletes item.
      * @param  string $name

@@ -23,7 +23,7 @@ use yii\bootstrap\Nav;
     ],
     'items' => [
         [
-            'label'   => Yii::t('rbac', 'Users'),
+            'label'   => Yii::t('rbac', 'Accounts'),
             'url'     => ['/account/admin/index'],
             'visible' => isset(Yii::$app->extensions['wartron/yii2-account']),
         ],

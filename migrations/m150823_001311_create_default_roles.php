@@ -25,9 +25,19 @@ class m150823_001311_create_default_roles extends Migration
                 'Role User',
             ],
             [
+                'admin-rbac',
+                2,
+                'Can Manage RBAC',
+            ],
+            [
                 'backend-accounts',
                 2,
                 'Can Manage Accounts',
+            ],
+            [
+                'backend-accounts-confirm',
+                2,
+                'Can Confirm Accounts',
             ],
             [
                 'backend-accounts-block',
@@ -37,12 +47,12 @@ class m150823_001311_create_default_roles extends Migration
             [
                 'backend-accounts-delete',
                 2,
-                'Can Block Accounts',
+                'Can Delete Accounts',
             ],
             [
-                'backend-rbac',
+                'backend-accounts-rbac',
                 2,
-                'Can Manage RBAC',
+                'Can Delete Accounts',
             ],
         ]);
 
@@ -51,19 +61,27 @@ class m150823_001311_create_default_roles extends Migration
         $this->batchInsert('{{%auth_item_child}}', $columns, [
             [
                 'admin',
-                'backend',
+                'admin-rbac',
             ],
             [
                 'admin',
-                'backend-rbac',
+                'backend',
             ],
             [
                 'admin',
                 'backend-accounts-delete',
             ],
             [
+                'admin',
+                'backend-accounts-rbac',
+            ],
+            [
                 'backend',
                 'backend-accounts',
+            ],
+            [
+                'backend',
+                'backend-accounts-confirm',
             ],
             [
                 'backend',
