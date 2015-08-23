@@ -16,6 +16,7 @@ use wartron\yii2account\rbac\models\Assignment;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
+use wartron\yii2uuid\helpers\Uuid;
 
 /**
  * This widget may be used in user update form and provides ability to assign
@@ -45,8 +46,8 @@ class Assignments extends Widget
     public function run()
     {
         $model = Yii::createObject([
-            'class'   => Assignment::className(),
-            'account_id' => $this->accountId,
+            'class'         =>  Assignment::className(),
+            'account_id'    =>  Uuid::uuid2str($this->accountId),
         ]);
 
         if ($model->load(\Yii::$app->request->post())) {

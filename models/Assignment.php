@@ -17,6 +17,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
+use wartron\yii2uuid\helpers\Uuid;
 
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
@@ -63,6 +64,8 @@ class Assignment extends Model
      */
     public function updateAssignments()
     {
+        $this->account_id = Uuid::str2uuid($this->account_id);
+
         if (!$this->validate()) {
             return false;
         }
