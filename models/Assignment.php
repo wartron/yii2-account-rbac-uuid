@@ -63,7 +63,7 @@ class Assignment extends Model
      */
     public function updateAssignments()
     {
-        $accountId = Uuid::str2uuid($accountId);
+        $this->account_id = Uuid::str2uuid($this->account_id);
 
         if (!$this->validate()) {
             return false;
