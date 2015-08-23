@@ -90,7 +90,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
             return null;
         }
         return new Assignment([
-            'accound_id' => $row['account_id'],
+            'account_id' => $row['account_id'],
             'item_name'  => $row['item_name'],
             'created_at' => $row['created_at'],
         ]);
@@ -109,7 +109,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
         $assignments = [];
         foreach ($query->all($this->db) as $row) {
             $assignments[$row['item_name']] = new Assignment([
-                'accound_id' => $row['account_id'],
+                'account_id' => $row['account_id'],
                 'item_name'  => $row['item_name'],
                 'created_at' => $row['created_at'],
             ]);
@@ -124,7 +124,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
     public function assign($role, $accountId)
     {
         $assignment = new Assignment([
-            'accound_id' => $accountId,
+            'account_id' => $accountId,
             'item_name'  => $role->name,
             'created_at' => time(),
         ]);
