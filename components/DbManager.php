@@ -21,6 +21,146 @@ use yii\rbac\DbManager as BaseDbManager;
  */
 class DbManager extends BaseDbManager implements ManagerInterface
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function getRolesByUser($accountId)
+    {
+        if (empty($accountId)) {
+            return [];
+        }
+        $query = (new Query)->select('b.*')
+            ->from(['a' => $this->assignmentTable, 'b' => $this->itemTable])
+            ->where('{{a}}.[[item_name]]={{b}}.[[name]]')
+            ->andWhere(['a.account_id' => (string) $accountId])
+            ->andWhere(['b.type' => Item::TYPE_ROLE]);
+        $roles = [];
+        foreach ($query->all($this->db) as $row) {
+            $roles[$row['name']] = $this->populateItem($row);
+        }
+        return $roles;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getPermissionsByUser($accountId)
+    {
+        if (empty($accountId)) {
+            return [];
+        }
+        $query = (new Query)->select('item_name')
+            ->from($this->assignmentTable)
+            ->where(['account_id' => (string) $accountId]);
+        $childrenList = $this->getChildrenList();
+        $result = [];
+        foreach ($query->column($this->db) as $roleName) {
+            $this->getChildrenRecursive($roleName, $childrenList, $result);
+        }
+        if (empty($result)) {
+            return [];
+        }
+        $query = (new Query)->from($this->itemTable)->where([
+            'type' => Item::TYPE_PERMISSION,
+            'name' => array_keys($result),
+        ]);
+        $permissions = [];
+        foreach ($query->all($this->db) as $row) {
+            $permissions[$row['name']] = $this->populateItem($row);
+        }
+        return $permissions;
+    }
+
+
+ /**
+     * @inheritdoc
+     */
+    public function getAssignment($roleName, $accountId)
+    {
+        if (empty($accountId)) {
+            return null;
+        }
+        $row = (new Query)->from($this->assignmentTable)
+            ->where(['account_id' => (string) $accountId, 'item_name' => $roleName])
+            ->one($this->db);
+        if ($row === false) {
+            return null;
+        }
+        return new Assignment([
+            'accountId' => $row['account_id'],
+            'roleName' => $row['item_name'],
+            'createdAt' => $row['created_at'],
+        ]);
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getAssignments($accountId)
+    {
+        if (empty($accountId)) {
+            return [];
+        }
+        $query = (new Query)
+            ->from($this->assignmentTable)
+            ->where(['account_id' => (string) $accountId]);
+        $assignments = [];
+        foreach ($query->all($this->db) as $row) {
+            $assignments[$row['item_name']] = new Assignment([
+                'accountId' => $row['account_id'],
+                'roleName' => $row['item_name'],
+                'createdAt' => $row['created_at'],
+            ]);
+        }
+        return $assignments;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function assign($role, $accountId)
+    {
+        $assignment = new Assignment([
+            'accountId' => $accountId,
+            'roleName' => $role->name,
+            'createdAt' => time(),
+        ]);
+        $this->db->createCommand()
+            ->insert($this->assignmentTable, [
+                'account_id' => $assignment->accountId,
+                'item_name' => $assignment->roleName,
+                'created_at' => $assignment->createdAt,
+            ])->execute();
+        return $assignment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function revoke($role, $accountId)
+    {
+        if (empty($accountId)) {
+            return false;
+        }
+        return $this->db->createCommand()
+            ->delete($this->assignmentTable, ['account_id' => (string) $accountId, 'item_name' => $role->name])
+            ->execute() > 0;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function revokeAll($accountId)
+    {
+        if (empty($accountId)) {
+            return false;
+        }
+        return $this->db->createCommand()
+            ->delete($this->assignmentTable, ['account_id' => (string) $accountId])
+            ->execute() > 0;
+    }
+
     /**
      * @param  int|null $type         If null will return all auth items.
      * @param  array    $excludeItems Items that should be excluded from result array.

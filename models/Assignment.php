@@ -54,7 +54,6 @@ class Assignment extends Model
         return [
             ['account_id', 'required'],
             ['items', RbacValidator::className()],
-            ['account_id', 'integer']
         ];
     }
 
