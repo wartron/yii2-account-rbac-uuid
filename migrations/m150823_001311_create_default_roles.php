@@ -51,19 +51,15 @@ class m150823_001311_create_default_roles extends Migration
         $this->batchInsert('{{%auth_item_child}}', $columns, [
             [
                 'admin',
-                'backend-accounts',
-            ],
-            [
-                'admin',
-                'backend-accounts-block',
-            ],
-            [
-                'admin',
-                'backend-accounts-delete',
+                'backend',
             ],
             [
                 'admin',
                 'backend-rbac',
+            ],
+            [
+                'admin',
+                'backend-accounts-delete',
             ],
             [
                 'backend',
