@@ -29,6 +29,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function getRolesByUser($accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return [];
         }
@@ -50,6 +51,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function getPermissionsByUser($accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return [];
         }
@@ -81,6 +83,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function getAssignment($roleName, $accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return null;
         }
@@ -101,6 +104,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function getAssignments($accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return [];
         }
@@ -124,6 +128,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function assign($role, $accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         $assignment = new Assignment([
             'userId' => $accountId,
             'roleName' => $role->name,
@@ -143,6 +148,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function revoke($role, $accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return false;
         }
@@ -155,6 +161,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function revokeAll($accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return false;
         }
@@ -200,6 +207,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
      */
     public function getItemsByUser($accountId)
     {
+        $accountId = Uuid::str2uuid($accountId);
         if (empty($accountId)) {
             return [];
         }
