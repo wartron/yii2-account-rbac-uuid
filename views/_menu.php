@@ -13,7 +13,7 @@
  * @var $this yii\web\View
  */
 
-use yii\bootstrap\Nav;
+use wartron\yii2widgets\urlactive\Nav;
 
 ?>
 
@@ -23,33 +23,43 @@ use yii\bootstrap\Nav;
     ],
     'items' => [
         [
-            'label'   => Yii::t('rbac', 'Accounts'),
-            'url'     => ['/account/admin/index'],
-            'visible' => isset(Yii::$app->extensions['wartron/yii2-account']),
+            'label'     =>  Yii::t('rbac', 'Accounts'),
+            'url'       =>  ['/account/admin/index'],
+            'visible'   =>  isset(Yii::$app->extensions['wartron/yii2-account']),
         ],
         [
-            'label' => Yii::t('rbac', 'Roles'),
-            'url'   => ['/rbac/role/index'],
+            'label'     =>  Yii::t('rbac', 'Roles'),
+            'url'       =>  ['/rbac/role/index'],
+            'urlActive' => [
+                ['/rbac/role/view'],
+                ['/rbac/role/update'],
+                ['/rbac/role/create'],
+            ]
         ],
         [
-            'label' => Yii::t('rbac', 'Permissions'),
-            'url'   => ['/rbac/permission/index'],
+            'label'     =>  Yii::t('rbac', 'Permissions'),
+            'url'       =>  ['/rbac/permission/index'],
+            'urlActive' => [
+                ['/rbac/permission/view'],
+                ['/rbac/permission/update'],
+                ['/rbac/permission/create'],
+            ]
         ],
         [
-            'label' => Yii::t('rbac', 'Create'),
-            'items' => [
+            'label'     =>  Yii::t('rbac', 'Create'),
+            'items'     =>  [
                 [
-                    'label'   => Yii::t('rbac', 'New user'),
-                    'url'     => ['/account/admin/create'],
-                    'visible' => isset(Yii::$app->extensions['wartron/yii2-account']),
+                    'label'     =>  Yii::t('rbac', 'New user'),
+                    'url'       =>  ['/account/admin/create'],
+                    'visible'   =>  isset(Yii::$app->extensions['wartron/yii2-account']),
                 ],
                 [
-                    'label' => Yii::t('rbac', 'New role'),
-                    'url'   => ['/rbac/role/create']
+                    'label'     =>  Yii::t('rbac', 'New role'),
+                    'url'       =>  ['/rbac/role/create']
                 ],
                 [
-                    'label' => Yii::t('rbac', 'New permission'),
-                    'url'   => ['/rbac/permission/create']
+                    'label'     =>  Yii::t('rbac', 'New permission'),
+                    'url'       =>  ['/rbac/permission/create']
                 ]
             ]
         ]
