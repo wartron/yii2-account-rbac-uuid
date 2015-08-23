@@ -11,6 +11,7 @@
 
 namespace wartron\yii2account\rbac\components;
 
+use wartron\yii2account\rbac\models\Assignment;
 use yii\db\Query;
 use yii\rbac\DbManager as BaseDbManager;
 
@@ -33,7 +34,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
         $query = (new Query)->select('b.*')
             ->from(['a' => $this->assignmentTable, 'b' => $this->itemTable])
             ->where('{{a}}.[[item_name]]={{b}}.[[name]]')
-            ->andWhere(['a.account_id' => (string) $accountId])
+            ->andWhere(['a.account_id' => $accountId])
             ->andWhere(['b.type' => Item::TYPE_ROLE]);
         $roles = [];
         foreach ($query->all($this->db) as $row) {
@@ -53,7 +54,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
         }
         $query = (new Query)->select('item_name')
             ->from($this->assignmentTable)
-            ->where(['account_id' => (string) $accountId]);
+            ->where(['account_id' => $accountId]);
         $childrenList = $this->getChildrenList();
         $result = [];
         foreach ($query->column($this->db) as $roleName) {
@@ -83,15 +84,15 @@ class DbManager extends BaseDbManager implements ManagerInterface
             return null;
         }
         $row = (new Query)->from($this->assignmentTable)
-            ->where(['account_id' => (string) $accountId, 'item_name' => $roleName])
+            ->where(['account_id' => $accountId, 'item_name' => $roleName])
             ->one($this->db);
         if ($row === false) {
             return null;
         }
         return new Assignment([
-            'accountId' => $row['account_id'],
-            'roleName' => $row['item_name'],
-            'createdAt' => $row['created_at'],
+            'accound_id' => $row['account_id'],
+            'item_name'  => $row['item_name'],
+            'created_at' => $row['created_at'],
         ]);
     }
     /**
@@ -104,13 +105,13 @@ class DbManager extends BaseDbManager implements ManagerInterface
         }
         $query = (new Query)
             ->from($this->assignmentTable)
-            ->where(['account_id' => (string) $accountId]);
+            ->where(['account_id' => $accountId]);
         $assignments = [];
         foreach ($query->all($this->db) as $row) {
             $assignments[$row['item_name']] = new Assignment([
-                'accountId' => $row['account_id'],
-                'roleName' => $row['item_name'],
-                'createdAt' => $row['created_at'],
+                'accound_id' => $row['account_id'],
+                'item_name'  => $row['item_name'],
+                'created_at' => $row['created_at'],
             ]);
         }
         return $assignments;
@@ -123,15 +124,15 @@ class DbManager extends BaseDbManager implements ManagerInterface
     public function assign($role, $accountId)
     {
         $assignment = new Assignment([
-            'accountId' => $accountId,
-            'roleName' => $role->name,
-            'createdAt' => time(),
+            'accound_id' => $accountId,
+            'item_name'  => $role->name,
+            'created_at' => time(),
         ]);
         $this->db->createCommand()
             ->insert($this->assignmentTable, [
                 'account_id' => $assignment->accountId,
                 'item_name' => $assignment->roleName,
-                'created_at' => $assignment->createdAt,
+                'created_at' => $assignment->created_at,
             ])->execute();
         return $assignment;
     }
@@ -145,7 +146,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
             return false;
         }
         return $this->db->createCommand()
-            ->delete($this->assignmentTable, ['account_id' => (string) $accountId, 'item_name' => $role->name])
+            ->delete($this->assignmentTable, ['account_id' => $accountId, 'item_name' => $role->name])
             ->execute() > 0;
     }
     /**
@@ -157,7 +158,7 @@ class DbManager extends BaseDbManager implements ManagerInterface
             return false;
         }
         return $this->db->createCommand()
-            ->delete($this->assignmentTable, ['account_id' => (string) $accountId])
+            ->delete($this->assignmentTable, ['account_id' => $accountId])
             ->execute() > 0;
     }
 
