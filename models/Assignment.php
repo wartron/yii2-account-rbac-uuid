@@ -27,7 +27,7 @@ class Assignment extends Model
     public $items = [];
 
 	/** @var binary */
-    public $accound_id;
+    public $account_id;
 
     /** @var boolean */
     public $updated = false;
@@ -40,20 +40,20 @@ class Assignment extends Model
     {
         parent::init();
         $this->manager = Yii::$app->authManager;
-        if ($this->accound_id === null) {
-            throw new InvalidConfigException('accound_id must be set');
+        if ($this->account_id === null) {
+            throw new InvalidConfigException('account_id must be set');
         }
 
-        $this->items = array_keys($this->manager->getItemsByUser($this->accound_id));
+        $this->items = array_keys($this->manager->getItemsByUser($this->account_id));
     }
 
     /** @inheritdoc */
     public function rules()
     {
         return [
-            ['accound_id', 'required'],
+            ['account_id', 'required'],
             ['items', RbacValidator::className()],
-            ['accound_id', 'integer']
+            ['account_id', 'integer']
         ];
     }
 
@@ -71,15 +71,15 @@ class Assignment extends Model
             $this->items = [];
         }
 
-        $assignedItems = $this->manager->getItemsByUser($this->accound_id);
+        $assignedItems = $this->manager->getItemsByUser($this->account_id);
         $assignedItemsNames = array_keys($assignedItems);
 
         foreach (array_diff($assignedItemsNames, $this->items) as $item) {
-            $this->manager->revoke($assignedItems[$item], $this->accound_id);
+            $this->manager->revoke($assignedItems[$item], $this->account_id);
         }
 
         foreach (array_diff($this->items, $assignedItemsNames) as $item) {
-            $this->manager->assign($this->manager->getItem($item), $this->accound_id);
+            $this->manager->assign($this->manager->getItem($item), $this->account_id);
         }
 
         $this->updated = true;

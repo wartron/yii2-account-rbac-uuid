@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     'enableAjaxValidation'   => false,
 ]) ?>
 
-<?= Html::activeHiddenInput($model, 'accound_id') ?>
+<?= Html::activeHiddenInput($model, 'account_id') ?>
 
 <?= $form->field($model, 'items')->widget(Select2::className(), [
     'data' => $model->getAvailableItems(),
