@@ -18,15 +18,14 @@
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title = Yii::t('rbac', 'Permissions');
 $this->params['breadcrumbs'][] = $this->title;
 
-?>
+$this->beginContent('@wartron/yii2account/rbac/views/layout.php');
 
-<?php $this->beginContent('@wartron/yii2account/rbac/views/layout.php') ?>
-
-<?= GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel'  => $filterModel,
     'layout'       => "{items}\n{pager}",
@@ -35,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'name',
             'header'    => Yii::t('rbac', 'Name'),
             'value' => function ($model) {
-                return Html::a($model->name, ['view', 'name' =>  $model->name ]);
+                return Html::a($model['name'], ['view', 'name' =>  $model['name'] ]);
             },
             'format' => 'raw',
             'options'   => [
@@ -67,6 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]
     ],
-]) ?>
+]);
 
-<?php $this->endContent() ?>
+
+
+$this->endContent();
