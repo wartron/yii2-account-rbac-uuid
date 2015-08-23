@@ -14,6 +14,7 @@ namespace wartron\yii2account\rbac\components;
 use yii\db\Query;
 use yii\rbac\Assignment;
 use yii\rbac\DbManager as BaseDbManager;
+use wartron\yii2uuid\helpers\Uuid;
 
 /**
  * This Auth manager changes visibility and signature of some methods from \yii\rbac\DbManager.
@@ -124,15 +125,15 @@ class DbManager extends BaseDbManager implements ManagerInterface
     public function assign($role, $accountId)
     {
         $assignment = new Assignment([
-            'accountId' => $accountId,
+            'userId' => $accountId,
             'roleName' => $role->name,
             'createdAt' => time(),
         ]);
         $this->db->createCommand()
             ->insert($this->assignmentTable, [
-                'account_id' => $assignment->accountId,
-                'item_name' => $assignment->roleName,
-                'created_at' => $assignment->createdAt,
+                'account_id'    =>  $assignment->userId,
+                'item_name'     =>  $assignment->roleName,
+                'created_at'    =>  $assignment->createdAt,
             ])->execute();
         return $assignment;
     }
