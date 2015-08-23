@@ -12,19 +12,11 @@
     ],
     "minimum-stability": "dev",
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/wartron/yii2-uuid.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/wartron/yii2-widgets-urlactive.git"
-        }
     ],
     "require": {
         "yiisoft/yii2": "2.0.*",
-        "wartron/yii2-uuid": "dev-master",
-        "wartron/yii2-widgets-urlactive": "dev-master",
+        "wartron/yii2-uuid": "*",
+        "wartron/yii2-widgets-urlactive": "*",
         "kartik-v/yii2-widget-select2": "*"
     },
     "autoload": {
