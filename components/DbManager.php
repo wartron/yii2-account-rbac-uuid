@@ -13,6 +13,7 @@ namespace wartron\yii2account\rbac\components;
 
 use yii\db\Query;
 use yii\rbac\Assignment;
+use yii\rbac\Item;
 use yii\rbac\DbManager as BaseDbManager;
 use wartron\yii2uuid\helpers\Uuid;
 
