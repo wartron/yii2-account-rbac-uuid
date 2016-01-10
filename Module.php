@@ -26,9 +26,6 @@ class Module extends BaseModule
     /** @var string */
     public $defaultRoute = 'role/index';
 
-    /** @var array */
-    public $admins = [];
-
     /** @inheritdoc */
     public function behaviors()
     {
@@ -40,7 +37,7 @@ class Module extends BaseModule
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function () {
-                            return in_array(Yii::$app->user->identity->username, $this->admins);
+                            return Yii::$app->user->identity->getIsAdmin();
                         },
                     ]
                 ],

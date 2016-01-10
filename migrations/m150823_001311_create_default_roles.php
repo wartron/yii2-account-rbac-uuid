@@ -54,6 +54,11 @@ class m150823_001311_create_default_roles extends Migration
                 2,
                 'Can Delete Accounts',
             ],
+            [
+                'backend-accounts-billing',
+                2,
+                'Can Manage Accounts Billing',
+            ],
         ]);
 
 
@@ -74,6 +79,10 @@ class m150823_001311_create_default_roles extends Migration
             [
                 'admin',
                 'backend-accounts-rbac',
+            ],
+            [
+                'admin',
+                'backend-accounts-billing',
             ],
             [
                 'backend',
